@@ -20,6 +20,7 @@ function compact(array) {
   }
 
   for (const value of array) {
+    // 判断 Boolean(value)
     if (value) {
       result[resIndex++] = value
     }

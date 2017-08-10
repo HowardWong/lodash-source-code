@@ -13,6 +13,8 @@
  * @returns {Array} Returns the slice of `array`.
  */
 function slice(array, start, end) {
+
+  // 处理空值
   let length = array == null ? 0 : array.length
   if (!length) {
     return []
@@ -20,6 +22,8 @@ function slice(array, start, end) {
   start = start == null ? 0 : start
   end = end === undefined ? length : end
 
+
+  // 处理负值为 length + start
   if (start < 0) {
     start = -start > length ? 0 : (length + start)
   }
@@ -27,9 +31,12 @@ function slice(array, start, end) {
   if (end < 0) {
     end += length
   }
+
+  // 无符号右移
   length = start > end ? 0 : ((end - start) >>> 0)
   start >>>= 0
 
+  // 生成新数组
   let index = -1
   const result = new Array(length)
   while (++index < length) {
