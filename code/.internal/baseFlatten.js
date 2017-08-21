@@ -11,6 +11,8 @@ import isFlattenable from './isFlattenable.js'
  * @param {Array} [result=[]] The initial result value.
  * @returns {Array} Returns the new flattened array.
  */
+
+// 将嵌套数组 变为扁平化数组
 function baseFlatten(array, depth, predicate, isStrict, result) {
   predicate || (predicate = isFlattenable)
   result || (result = [])
@@ -23,6 +25,7 @@ function baseFlatten(array, depth, predicate, isStrict, result) {
     if (depth > 0 && predicate(value)) {
       if (depth > 1) {
         // Recursively flatten arrays (susceptible to call stack limits).
+        // 递归扁平化数组
         baseFlatten(value, depth - 1, predicate, isStrict, result)
       } else {
         result.push(...value)

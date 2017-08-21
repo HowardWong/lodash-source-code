@@ -23,6 +23,8 @@ import isLength from './isLength.js'
  * isArrayLike(Function)
  * // => false
  */
+
+// 任何包含 合法length 值
 function isArrayLike(value) {
   return value != null && typeof value != 'function' && isLength(value.length)
 }
