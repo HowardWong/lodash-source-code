@@ -21,38 +21,17 @@ import isArrayLikeObject from './isArrayLikeObject.js'
  * difference([2, 1], [2, 3])
  * // => [1]
  */
-function slice(array, start, end) {
-
-  // 处理空值
-  let length = array == null ? 0 : array.length
-  if (!length) {
-    return []
+function after(n, func) {
+  if (typeof func != 'function') {
+    throw new TypeError('Expected a function')
   }
-  start = start == null ? 0 : start
-  end = end === undefined ? length : end
-
-
-  // 处理负值为 length + start
-  if (start < 0) {
-    start = -start > length ? 0 : (length + start)
+  return function(...args) {
+    if (--n < 1) {
+      return func.apply(this, args)
+    }
   }
-  end = end > length ? length : end
-  if (end < 0) {
-    end += length
-  }
-
-  // 无符号右移
-  length = start > end ? 0 : ((end - start) >>> 0)
-  start >>>= 0
-
-  // 生成新数组
-  let index = -1
-  const result = new Array(length)
-  while (++index < length) {
-    result[index] = array[index + start]
-  }
-  return result
 }
+
 function difference(array, ...values) {
   return isArrayLikeObject(array)
     ? baseDifference(array, baseFlatten(values, 1, isArrayLikeObject, true))
